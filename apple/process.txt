@@ -1,0 +1,56 @@
+1. Run
+	exp build:ios
+	Build the app by letting expo do all the settings
+
+	Remove the distribution - push certificate and the provisioning profile, keep the App ID.
+
+(cd c:\OpenSSL-Win64\bin)
+
+2. Create the request
+	- create the key
+	.\openssl genrsa -out akadema.key 2048
+	- create the request
+	.\openssl req -new -key akadema.key -out akadema.certSigningRequest -subj "/emailAddress=bmoy69@gmail.com, CN=Vasilieios Moysidis, C=GR"
+
+3. Create certificate 
+	- select the Production App Store and Ad Hoc option.
+	- upload request akadema.certSigningRequest
+	- download certificate 
+	- rename to akadema.cer 
+
+4. Edit App ID
+	- enable push  notifications
+	- create push certificate
+	- upload request akadema.certSigningRequest
+	- download the certificate
+	- rename it to akademapush.cer
+
+(-. Add devices UDID if you have not done that already)
+
+
+5. Create provisioning profile 
+	- select Ad Hoc option.
+	- select the akadema.cer certificate you created above
+	- select the devices you want it to run on
+	
+
+6. Create p12 file
+	.\openssl x509 -in akadema.cer -inform DER -out akadema.pem -outform PEM
+	.\openssl pkcs12 -export -inkey akadema.key -in akadema.pem -out akadema.p12
+
+	.\openssl x509 -in akademapush.cer -inform DER -out akademapush.pem -outform PEM
+	.\openssl pkcs12 -export -inkey akadema.key -in akademapush.pem -out akademapush.p12
+
+	password: bmoy
+
+7. Move the created files in the /expo projects/(project)/apple folder
+	akadema.p12
+	akademapush.p12
+	akadema.mobileprovision
+8. Run
+	exp build:ios -c
+	- ? How would you like to upload your credentials?
+ 	    I will provide all the credentials and files needed, Expo does limited validation
+	- Upload p12 file ./apple/akadema.p12
+	- Upload p12 file ./apple/akademapush.p12
+	- Upload provisioning file ./apple/akadema.mobileprovision

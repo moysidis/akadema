@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Akadema",
+    "description": "Hitta bästa läxhjälpen",
+    "slug": "akadema",
+    "privacy": "public",
+    "scheme": "akadema",
+    "sdkVersion": "32.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "se.akadema.akadema",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Akadema behöver veta din plats för att underlätta sökningar och ge mera relevanta resultat som passar bättre dina behov.",
+        "NSCameraUsageDescription": "Akadema behöver använda din kamera för att kunna ta bilder för din profil."
+      }
+    },
+    "android": {
+      "package": "se.akadema.akadema",
+      "versionCode": 2
+    }
+  }
+}
